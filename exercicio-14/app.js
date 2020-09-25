@@ -6,6 +6,10 @@
 */
 
 
+const title = document.querySelector("h1").textContent.toLocaleUpperCase();
+
+console.log(title)
+
 
 /*
   02
@@ -14,7 +18,16 @@
   - Cada número deve estar dentro de uma <li> com a classe "number".
 */
 
-const numbers = [ 53, 24, 3, 8, 1, 6, 57, 80, 77, 98, 55 ]
+const numbers = [ 53, 24, 3, 8, 1, 6, 57, 80, 77, 98, 55 ];
+
+const listOfNumbers = document.querySelector(".numbers");
+
+// let list = "";
+// numbers.forEach((number) => {
+//   list += `<p class='red'> - ${number}</p>`
+// });
+
+// listOfNumbers.innerHTML = list;
 
 /*
   03
@@ -23,6 +36,18 @@ const numbers = [ 53, 24, 3, 8, 1, 6, 57, 80, 77, 98, 55 ]
     - Se o número é par, ele deve ser exibido na cor "lightblue";
     - Se o número é ímpar, exiba-o na cor "pink".
 */
+
+
+let list = "";
+numbers.forEach((number) => {
+  if(number % 2 === 0) {
+    list += `<li class='red'> - ${number}</li>`;
+  } else {
+    list += `<li class='blue'> - ${number}</li>`;
+  }
+});
+
+listOfNumbers.innerHTML = list;
 
 
 
@@ -34,6 +59,8 @@ const numbers = [ 53, 24, 3, 8, 1, 6, 57, 80, 77, 98, 55 ]
   P.s: a classe "body-background" já está declarada no style.css.
 */
 
+const bodyPage = document.querySelector('body');
+bodyPage.setAttribute('class','body-background');
 
 
 /*
@@ -44,6 +71,8 @@ const numbers = [ 53, 24, 3, 8, 1, 6, 57, 80, 77, 98, 55 ]
     do link do index.html.
 */
 
+const addLink = document.querySelector('.link');
+addLink.setAttribute('href','https://github.com/roger-melo-treinamentos/curso-de-js-roger-melo')
 
 
 /*
@@ -53,6 +82,8 @@ const numbers = [ 53, 24, 3, 8, 1, 6, 57, 80, 77, 98, 55 ]
 */
 
 
+console.log(addLink)
+
 
 /*
   07
@@ -61,6 +92,9 @@ const numbers = [ 53, 24, 3, 8, 1, 6, 57, 80, 77, 98, 55 ]
     manipuladas via JS no h1.
 */
 
+const titleProps = document.querySelector('h1');
+
+console.log(titleProps.style)
 
 
 /*
@@ -70,6 +104,8 @@ const numbers = [ 53, 24, 3, 8, 1, 6, 57, 80, 77, 98, 55 ]
 */
 
 
+bodyPage.removeAttribute('class');
+
 
 /*
   09
@@ -77,3 +113,12 @@ const numbers = [ 53, 24, 3, 8, 1, 6, 57, 80, 77, 98, 55 ]
   - Se o link da página possuir uma classe "link", remova-a;
   - Não utilize o método remove() para fazer isso.
 */
+
+
+const pageLink = document.querySelector('a');
+const getAttributte = pageLink.getAttribute('class');
+
+if(getAttributte === 'link') {
+  console.log('Havia um link na página');
+  pageLink.setAttribute("class","");
+}

@@ -12,7 +12,14 @@ const getCatInfo = () => {
   const name = 'Marcos'
   let age = 3
   const color = 'Cinza'
+
+  // return `The cat ${name} is ${age} years old and has ${color} fur` 
+  return {name, age, color}
 }
+
+const {name, age, color} = getCatInfo()
+
+console.log(`The cat ${getCatInfo().name} is ${getCatInfo().age} years old and has ${getCatInfo().color} fur`);
 
 /*
   02
@@ -24,12 +31,14 @@ const getCatInfo = () => {
 
 const external = () => {
   const movie = 'Parasite'
-
   const internal = () => {
     const extraInternal = () => {
       console.log(movie.toUpperCase())
+      
     }
+    extraInternal()
   }
+  internal()
 }
 
 external()
@@ -45,6 +54,8 @@ external()
 
 let randomNumbers = [3, 2, 1]
 
+// console.log(randomNumbers.reverse())
+
 /*
   04
 
@@ -58,6 +69,9 @@ let crazyArray = [
   function getMessage () { return 'hi' },
   [ 5, 96, 53  ]
 ]
+
+crazyArray[2].pop()
+// console.log(crazyArray)
 
 /*
   05
@@ -75,6 +89,17 @@ const dogs = [
   { name: 'Zequinha', age: 7, gender: 'Male', breed: 'Poodle' },
   { name: 'Xica', age: 6, gender: 'Female', breed: 'Chihuahua' }
 ]
+
+const dogFinder = (val) => {
+  const findDog = dogs.find((dog) => dog.name === val);
+  if(find === true) {
+    console.log(findDog);
+  } else {
+    console.log("Cachorro não encontrado");
+  }
+}
+
+dogFinder('Zequinhaa');
 
 /*
   06
@@ -108,6 +133,10 @@ const dogs = [
   </section>
 */
 
+const articleTite = document.querySelector('.main-title')
+
+//articleTite.forEach(title => console.log(title))
+
 /*
   07
 
@@ -115,3 +144,8 @@ const dogs = [
     página, através da classe deles;
   - Exiba esse NodeList no console.
 */
+
+const secondaryTite = document.querySelectorAll('.secondary-title');
+secondaryTite.forEach(title => console.log(title.innerText))
+
+
