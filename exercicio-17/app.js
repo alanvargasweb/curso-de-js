@@ -1,8 +1,29 @@
 /*
-  01
+  01 correct
 
   - No envio do form, faça com que a página não seja recarregada.
 */
+
+const form = document.querySelector('form');
+
+const documentationLink = document.querySelector('a');
+const inputValid = /[a-zA-Z)-9]{7,12}/;
+
+const clearInput = () => {
+  input.value = '';
+  input.focus()
+}
+
+const submitForm = (evt) => {
+  evt.preventDefault();
+  const input = evt.target.input;
+  const validation = inputValid.test(input.value) ? input.value : 'O número deve conter de 7 a 11 caraceres'
+  console.log(validation)
+  clearInput()
+}
+
+form.addEventListener('submit', submitForm)
+
 
 /*
   02
@@ -19,6 +40,10 @@
   - Exiba no console o boolean no qual este teste resulta.
 */
 
+const machWithDocumentation = /documentation/;
+const documentationLinkText = documentationLink.innerText;
+// console.log(machWithDocumentation.test(documentationLinkText))
+
 /*
   04
 
@@ -29,18 +54,21 @@
 
 const B99message = 'E o Terry Crews faz tudo, inclusive tocar a abertura de B99 na flauta'
 
+const matchB99 = /[A-Z]{3}/;
+// console.log(matchB99.test(matchB99))
+
 /*
-  05
+  05 correct
 
   - Modifique (manualmente) o valor que a const word armazena para que o  
     resultado do teste entre a regex e a string exibido no console seja true.
 */
 
-const word = 'O que a NASA fotografou no dia do seu aniversário?'
+const word = 'NASA'
 const NASARegex = /^[A-Z]{4}$/
 const NASAResult = NASARegex.test(word)
 
-console.log(NASAResult)
+// console.log(NASAResult)
 
 /*
   06
@@ -54,6 +82,7 @@ console.log(NASAResult)
     - "a[b@X7c" é um valor válido, pois contém 7 caracteres;
     - "jozeti" não é um valor válido, pois contém 6 caracteres.
 */
+
 
 /*
   07

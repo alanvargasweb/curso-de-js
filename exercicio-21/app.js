@@ -5,7 +5,10 @@
     o novo array no console.
 */
 
-const randomNumbers = [10, 30, 15, 25, 50, 40, 5]
+const randomNumbers = [10, 30, 15, 25, 50, 40, 5];
+const getOddNumbers = number => number % 2 === 1;
+const oddNumbers = randomNumbers.filter(getOddNumbers);
+// console.log(oddNumbers)
 
 /*
   02
@@ -13,7 +16,10 @@ const randomNumbers = [10, 30, 15, 25, 50, 40, 5]
   - Exiba no console quantos números abaixo de 501 o array abaixo possui.
 */
 
-const crazyNumbers = [937, 5, 395, 402, 501, 333, 502, 781, 3, 691]
+const crazyNumbers = [937, 5, 395, 402, 501, 333, 502, 781, 3, 691];
+const numbersGreatThan501 = (acc, item) => item < 501 ? ++acc : acc; 
+const newCrazyNumbers = crazyNumbers.reduce(numbersGreatThan501, 0);
+// console.log(newCrazyNumbers);
 
 /*
   03
@@ -22,7 +28,9 @@ const crazyNumbers = [937, 5, 395, 402, 501, 333, 502, 781, 3, 691]
     exiba o novo array no console.
 */
 
-const numbers = [5, 7, 3]
+const numbers = [5, 7, 3];
+const newNumbers = numbers.map(num => num ** 2);
+// console.log(newNumbers)
 
 /*
   04
@@ -42,6 +50,11 @@ const cart = [
   { name: 'Resident Evil 2', price: 119.90 },
   { name: 'Death Stranding', price: 149.99 }
 ]
+
+
+const getNamesOfFilm = (acc, item) => `${acc} - ${item.name}\n`;
+const cartReduce = cart.reduce(getNamesOfFilm, '');
+console.log(cartReduce);
 
 /*
   - Nome 1
@@ -70,6 +83,10 @@ const tarantinoMovies = [
   { name: 'Kill Bill: Volume 1', release: 2003 }
 ]
 
+const tarantinoMoviesReleasedBefore2000 = (filme) => filme.release > 2000
+const newtarantinoMovies = tarantinoMovies.filter(tarantinoMoviesReleasedBefore2000);
+console.log(newtarantinoMovies)
+
 /*
   06
 
@@ -86,6 +103,10 @@ const tvShows = [
   { name: 'House M.D.', releaseYear: 2004 },
   { name: 'Watchmen', releaseYear: 2019 }
 ]
+
+const newTvShows = tvShows.reduce((acc, {name}, index, array) => `${acc + name}, `, '')
+
+console.log(newTvShows);
 
 /*
   07

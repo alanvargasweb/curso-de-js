@@ -1,3 +1,6 @@
+const form = document.querySelector('form');
+const username = document.querySelector('#username');
+
 /*
   Apenas 3 exercícios, mas que exigem um certo nível de conhecimento do que  
   vimos até aqui =)
@@ -21,13 +24,41 @@
   Dica: pesquise pelo método "insertAdjacentElement", no MDN;
 */
 
+
+const submitForm = (evt) => {
+
+  const rule = /[a-zA-Z]{6,}/;
+  const user = evt.target.username;
+  const validation = rule.test(evt.target.value);
+  const alertMessage = document.createElement('p');
+  p.setAttribute('data-feedback','username-feedback');
+ 
+  if (!validation) {
+    evt.target.style.borderColor = 'red';
+    alertMessage.textContent = 'Valor inválido'
+    alertMessage.setAttribute('class','submit-help-feedback');
+    if()
+    evt.target.insertAdjacentElement('afterend', alertMessage);
+    setListener(tempDiv);
+    
+  } else {
+    evt.target.style.borderColor = 'green'
+  }
+
+  // setListener(alertMessage);
+
+  console.log(evt.target)
+}
+
+username.addEventListener('keyup', submitForm);
+
 /*
   02
 
   - Valide o envio do form;
-  - Se o username inserido no input é válido, no envio do form, exiba um  
+  - Se o username inserido no input é válido, no envio do form, exiba um
     parágrafo verde abaixo do botão com a mensagem "Dados enviados =)";
-  - Se no momento do envio, o valor do input é inválido, o parágrafo deve ser  
+  - Se no momento do envio, o valor do input é inválido, o parágrafo deve ser
     vermelho e exibir "Por favor, insira um username válido".
   - Use as classes disponíveis no arquivo style.css para colorir o parágrafo;
   - Não insira o parágrafo manualmente no index.html.
@@ -38,7 +69,7 @@
 
   - Há algumas aulas, falamos sobre o método some;
   - Neste exercício, seu desafio será criar este método do zero;
-  - Implemente uma função "some" que possui a mesma funcionalidade do método  
+  - Implemente uma função "some" que possui a mesma funcionalidade do método
     some original;
   - A assinatura da invocação desta função deverá ser:
     - some([1, 2, 3], item => item > 2) - Retorna true;
@@ -46,10 +77,10 @@
   - Se você não se lembra como o método some funciona, há 2 opções:
     1) Reassistir às seguintes aulas:
       - "Desenvolvendo um popup" - Aula 04-04 da etapa 5;
-      - "Correção dos exercícios da aula 04 da etapa 05" - Aula 01-01 da etapa  
+      - "Correção dos exercícios da aula 04 da etapa 05" - Aula 01-01 da etapa
         6;
     2) Pesquisar no MDN.
-  
-  Spoiler alert: este tipo de exercício será frequente em etapas mais avançadas  
+
+  Spoiler alert: este tipo de exercício será frequente em etapas mais avançadas
   do curso, onde falaremos sobre TDD. Vá se aquecendo =D
 */

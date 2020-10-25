@@ -21,3 +21,59 @@ Link do repositório do curso: https://github.com/roger-melo-treinamentos/curso-
 
 Ps: se você não conseguiu fazer tudo o que foi pedido acima, abra a issue mesmo assim =)
 */
+
+
+const quizForm = document.querySelector('.quiz-form');
+
+const answer = (event) => {
+    event.preventDefault()
+
+    const answers = [quizForm.askA.value, quizForm.askB.value, quizForm.askC.value];
+    const message = document.createElement('div');
+
+    let score = 0;
+    let alert = "";
+    let color = ''
+
+    answers.forEach((elem) => {
+
+        switch (elem) {
+            case 'opt1':
+                score += 3;
+                break;
+
+            case 'opt2':
+                score += 6;
+                break;
+
+            default:
+                score += 9;
+        }
+    });
+
+    if (score < 15) {
+        alert = "Sua vida é saudável";
+        color = 'alert-primary';
+    }  else if (score >= 15 && score < 20) {
+        alert = "Solicitamos melhor cuidado com a sua vida"
+        color = 'alert-warning';
+    } else {
+        alert = "Procure um medico"
+        color = 'alert-danger';
+    }
+
+    const attrExists = document.querySelector('[data-feedback = "alert"]');
+
+    if (attrExists) {
+        attrExists.remove();
+    }
+
+    message.textContent = `Você fez ${score} pontos. ${alert}`
+
+    message.setAttribute('data-feedback', 'alert');
+    message.classList.add('alert', color,'text-center')
+
+    quizForm.insertAdjacentElement('beforebegin', message);
+}
+
+quizForm.addEventListener('submit', answer);

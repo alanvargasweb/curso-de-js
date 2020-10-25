@@ -12,6 +12,13 @@
 */
 
 
+const messageFunction = (msg) => {
+  console.log(msg)
+}
+
+const message = 'um segundo e meio se passou'
+setTimeout(messageFunction, 100, message)
+
 
 /* 
   03
@@ -20,50 +27,78 @@
   - O clique no botão "Parar contador" deve fazer com que o contador exiba 0.
 */
 
+const startCounter = document.querySelector('.button-init-counter');
+const restartCounter = document.querySelector('.button-restart-counter');
+const stopCounter = document.querySelector('.button-stop-counter');
+const counter = document.querySelector('.counter-container');
+
+let count = 0;
+let timer = null;
+
+const counterFunction = () => {
+  timer = setInterval(() => {
+    ++count;
+    counter.textContent = count;
+  }, 1000);
+}
+
+const stopCounterFunction = () => {
+  clearInterval(timer);
+}
+
+const restartCounterFunction = () => {
+  count = 0
+  counter.textContent = count;
+}
+
+startCounter.addEventListener('click', counterFunction);
+stopCounter.addEventListener('click', stopCounterFunction);
+restartCounter.addEventListener('click', restartCounterFunction)
 
 
-/* 
+
+/*
   04
 
   - A partir deste exercício, vamos voltar a trabalhar na sua versão do Quiz =D
   - Adicione mais 2 alternativas em cada pergunta do quiz.
 */
 
-/* 
+/*
   05
 
-  - Modifique a ordem das alternativas corretas. Ou seja, faça com que a  
+  - Modifique a ordem das alternativas corretas. Ou seja, faça com que a
     alternativa correta das perguntas não seja apenas a alternativa "B".
 */
 
-/* 
+/*
   06
 
   - Refatore o código.
-  
-  Dicas: 
-    - Primeiro, quebre o código da função de callback de envio do form em  
+
+  Dicas:
+    - Primeiro, quebre o código da função de callback de envio do form em
       funções isoladas;
     - Depois, cuide da legibilidade das funções.
 */
 
-/* 
+/*
   07
 
-  O exercício agora é considerarmos fazer dessa aplicação uma peça do seu 
+  O exercício agora é considerarmos fazer dessa aplicação uma peça do seu
   portfólio.
 
-  Se você conseguiu executar o exercício da aula passada, especialmente sem ter  
-  que rever partes da aula, ou seja, se você sente que desenvolveu a sua versão  
+  Se você conseguiu executar o exercício da aula passada, especialmente sem ter
+  que rever partes da aula, ou seja, se você sente que desenvolveu a sua versão
   do quiz por conta própria, considere inserí-la como parte de seu portfólio.
 
-  Caso contrário, reveja as aulas e treine novamente até que você consiga 
+  Caso contrário, reveja as aulas e treine novamente até que você consiga
   desenvolver a aplicação sozinho(a).
 
-  A ideia é: considere inserir a sua versão do quiz em seu portifólio apenas se 
+  A ideia é: considere inserir a sua versão do quiz em seu portifólio apenas se
   você sente que *aprendeu* a desenvolvê-la.
 
-  Se você ainda não tem um site próprio para hospedar os arquivos da aplicação, 
-  você pode hospedá-la no Netlify seguindo este tutorial: 
+  Se você ainda não tem um site próprio para hospedar os arquivos da aplicação,
+  você pode hospedá-la no Netlify seguindo este tutorial:
   https://www.youtube.com/playlist?list=PLlAbYrWSYTiMGMxQf9JSoZUU1rgVpGPth
 */
