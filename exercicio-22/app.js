@@ -6,7 +6,12 @@
   - Exiba o array ordenado no console.
 */
 
+const getArrayCopy = array => array.map(item => item);
+
 const names = ['Caio', 'André', 'Dário']
+const namesCopy = getArrayCopy(names);
+const namesInAlphabeticOrder = namesCopy.sort();
+// console.log(namesInAlphabeticOrder)
 
 /*
   02
@@ -23,6 +28,10 @@ const characters = [
   { id: 04, name: 'Mufasa' }
 ]
 
+const charactersCopy = characters.map(({ id, name }) => ({id, name}));
+const charactersOrderdById = charactersCopy.sort((str1, str2) => str1.id - str2.id)
+// console.log(charactersOrderdById)
+
 /*
   03
 
@@ -31,7 +40,9 @@ const characters = [
   - Exiba o array ordenado no console.
 */
 
-const numbers = [41, 15, 63, 349, 25, 22, 143, 64, 59, 291]
+const numbers = [41, 15, 63, 349, 25, 22, 143, 64, 59, 291];
+const numbersInAscendingOrder = getArrayCopy(numbers).sort((n1, n2) => n1 - n2);
+// console.log(numbersInAscendingOrder)
 
 /*
   04
@@ -39,7 +50,10 @@ const numbers = [41, 15, 63, 349, 25, 22, 143, 64, 59, 291]
   - Encontre e exiba no console o 1º item maior que 50 do array abaixo.
 */
 
-const randomNumbers = [10, 5, 0, 40, 60, 10, 20, 70]
+const randomNumbers = [10, 5, 0, 40, 60, 10, 20, 70];
+const orderrandonNumbers = randomNumbers.filter(number => number > 50)
+.sort((number1, number2) => number1 - number2);
+// console.log(orderrandonNumbers)
 
 /*
   05
@@ -50,6 +64,9 @@ const randomNumbers = [10, 5, 0, 40, 60, 10, 20, 70]
 */
 
 const people = ['Cauã', 'Alfredo', 'Bruno']
+const peopleCopy = getArrayCopy(people)
+const orderPeople = peopleCopy.sort().reverse()
+// console.log(orderPeople)
 
 /*
   06
@@ -60,6 +77,25 @@ const people = ['Cauã', 'Alfredo', 'Bruno']
 */
 
 const ingredients = ['vinho', 'tomate', 'cebola', 'cogumelo']
+const igredientesCozidos = ingredients.reduce((acc, item, index, array) => {
+  const correctWord = /a$/.test(item) ? 'cozida' : 'cozido';
+  const isLastItem = index === array.length - 1;
+  let message
+
+  if (isLastItem) {
+    message =  acc + `e ${item} ${correctWord} `
+  } else if (index === array.length - 2) {
+    message =  acc + `${item} ${correctWord} `
+  } else {
+    message =  acc + `${item} ${correctWord}, `
+  }
+
+  
+
+  return message;
+
+}, '');
+console.log(igredientesCozidos)
 
 /*
   07
@@ -81,6 +117,11 @@ const topBrazilmovies = [
   { title: 'Dona Flor e Seus Dois Maridos', peopleAmount: 10735524, distributedBy: 'Embrafilme' }
 ]
 
+const disneyFilms = topBrazilmovies.filter(({ distributedBy }) => distributedBy === 'Disney');
+const disneyFilmsCustomers = disneyFilms.reduce((acc, item) => acc + item.peopleAmount, 0).toLocaleString('pt-BR');
+
+// console.log(disneyFilmsCustomers)
+
 /*
   08
   
@@ -95,11 +136,16 @@ const topBrazilmovies = [
 const pets = [
   { name: 'Boris', age: 4, gender: 'Male', type: 'Dog' },
   { name: 'Jimmy', age: 1, gender: 'Male', type: 'Cat' },
-  { name: 'Pérola', age: 2, gender: 'Female', type: 'Dog' },
+  { name: 'Pérola', age: 20, gender: 'Female', type: 'Dog' },
   { name: 'Lucy', age: 5, gender: 'Female', type: 'Cat' },
   { name: 'Cristal', age: 3, gender: 'Female', type: 'Dog' },
   { name: 'Chico', age: 6, gender: 'Male', type: 'Dog' }
 ]
+
+const dogs = pets.filter(({type}) => type === 'Dog');
+const dogsArray = dogs.map(({ name, age, gender }) => ({ name,   age: age * 7,  gender }));
+
+console.log(dogsArray);
 
 /*
   09
@@ -108,13 +154,25 @@ const pets = [
     os nomes dos filmes na ul do index.html.
 */
 
+const ul = document.querySelector('.list-group');
+
+// const filmList = topBrazilmovies
+// .map(({ title, distributedBy, peopleAmount }) => {
+//   return `<li> ${title} producted by ${distributedBy} had ${peopleAmount.toLocaleString('pt-BR')} customers</li>`
+// })
+// .join('');
+
+const movieNames = topBrazilmovies.reduce((acc, { title, distributedBy, peopleAmount }) => acc + `<li> <strong>${title}</strong> producted by ${distributedBy} had ${peopleAmount.toLocaleString('pt-BR')} of public</li> `, '')
+
+ul.innerHTML = movieNames;
+
 /*
   10
-  
-  - Na sua versão do Quiz, teste se ao enviar o form pela 2ª vez consecutiva, a 
+
+  - Na sua versão do Quiz, teste se ao enviar o form pela 2ª vez consecutiva, a
     pontuação do envio anterior é contabilizada;
-  - Exemplo: exibe 100% no 1º envio e 200% no 2º envio (sem modificar as 
+  - Exemplo: exibe 100% no 1º envio e 200% no 2º envio (sem modificar as
     alternativas entre os envios);
-    - Se isso está acontecendo, proponha uma solução para que o 2º submit não 
+    - Se isso está acontecendo, proponha uma solução para que o 2º submit não
       considere a pontuação do envio anterior.
 */

@@ -6,6 +6,8 @@
 */
 
 const myString = '    JS      '
+const myStringTrim = myString.trim();
+// console.log(myStringTrim)
 
 /*
   02
@@ -23,6 +25,12 @@ const people = [
   { firstName: 'Eric', lastName: 'Silva', score: 82 }
 ]
 
+const listPeople = people
+  .map(({ firstName, lastName, score }) => ({ name: `${firstName}  ${lastName}`, score }))
+  .sort((a, b) => a.score - b.score)
+
+// console.log(listPeople)
+
 /*
   03
 
@@ -35,12 +43,20 @@ const people = [
 
 const animals = ['cão', 'gato', 'boi', 'leão', 'gnu', 'alce', 'ema']
 
+const animalsFilter = animals.filter((item) => item.length < 4);
+
+// console.log(animalsFilter);
+
 /*
   04
 
   - Baseado no array "animals", gere um novo array com a quantidade de letras do 
     nome de cada animal. Ex.: [6, 8, 2].
 */
+
+const animalSizeName = animals.map(item => item.length);
+
+// console.log(animalSizeName)
 
 
 
@@ -60,6 +76,13 @@ const friends = [
   { id: 5, name: 'Solange', nearMe: false }
 ]
 
+const friendsNearby = friends.filter(friends => friends.nearMe).map(friends => {
+  return {
+    id: friends.id,
+    name: friends.name
+  }
+});
+//console.log(friendsNearby)
 
 
 /*
@@ -70,6 +93,12 @@ const friends = [
 */
 
 const numbers = [46, 86, 212, 29, 51, 9, 25, 42, 81]
+
+const oddNumbers = numbers.filter(number => number % 2 === 0).reduce((ac, cu) => {
+  return ac + cu;
+}, 0)
+
+console.log(oddNumbers)
 
 /*
   07
@@ -91,3 +120,9 @@ const data = [{
   country: 'Indonesia',
   population: 263991379
 }]
+
+const listCountry = data
+  .filter(item => item.country !== "China")
+  .reduce((ac, cu) => ac + cu.population, 0)
+
+console.log(listCountry)
