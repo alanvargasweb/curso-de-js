@@ -5,6 +5,8 @@
     array "months".
 */
 
+const dataAtual = new Date;
+
 const months = [
   'Janeiro',
   'Fevereiro',
@@ -18,7 +20,13 @@ const months = [
   'Outubro',
   'Novembro',
   'Dezembro'
-]
+];
+
+
+const currenntMonth =  dataAtual.getMonth();
+console.log(months[currenntMonth]);
+
+console.log(months.indexOf('Fevereiro'));
 
 /*
   02
@@ -33,6 +41,9 @@ const months = [
   - Baseado no objeto que você acabou de criar, exiba o ano atual no console.
 */
 
+const currentYear = dataAtual.getFullYear();
+// console.log(currentYear);
+
 /*
   04
 
@@ -40,11 +51,17 @@ const months = [
   - Exiba o objeto no console.
 */
 
+const past = new Date('Febuary 27 1897');
+// console.log(past)
+
 /*
   05
 
   - Exiba, no console, a hora do objeto que você acabou de criar.
 */
+
+const currentHour = dataAtual.getHours();
+// console.log(currentHour);
 
 /*
   06
@@ -53,11 +70,22 @@ const months = [
   - Exiba o objeto no console.
 */
 
+
+const future = new Date('May 4 2021 00:00:00');
+
+console.log(future)
+
+
 /*
   07
 
   - Exiba no console a quantidade de dias entre o momento futuro e o passado.
 */
+
+const diference = future.getTime() - past.getTime();
+const diferenceInDays = Math.round(diference / 1000 / 60 / 60 / 24)
+console.log(diferenceInDays);
+
 
 /*
   08
