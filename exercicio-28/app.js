@@ -16,6 +16,18 @@
   - Teste também a verificação do item acima.
 */
 
+const request = new XMLHttpRequest();
+
+request.addEventListener('readystatechange', () => {
+  if ( request.readyState === 4 && request.status === 200) {
+    console.log(request.responseText, request)
+  }
+})
+
+request.open('GET','https://pokeapi.co/api/v2/pokemon/pikachu');
+request.send();
+
+
 /*
   02
 
@@ -31,6 +43,18 @@
     - Quantos metros você caminhou (number iniciado em 0).
 */
 
+const myName = {
+  name: 'Alan',
+  sobrenome: 'Vargas',
+  sexo: 'Masculino',
+  idade: 35,
+  altura: 1.8,
+  peso: 78,
+  andando: true,
+  caminhados: 2000,
+  descricao: ''
+}
+
 /*
   03
 
@@ -39,6 +63,14 @@
   - A cada vez que o método é invocado, 1 deve ser somado à idade atual;
   - Após criar o método, adicione 5 anos à idade do objeto.
 */
+
+myName.addAge = (age) => {
+  myName.idade ++;
+}
+
+myName.addAge(1)
+
+// console.log(myName)
 
 /*
   04
@@ -50,6 +82,20 @@
   - Após criar o método, faça a pessoa caminhar alguns metros, invocando o 
     método 4x, com diferentes metragens passadas por parâmetro.
 */
+
+ myName.addKm = (mt) => {
+   
+   if (!myName.andando) {
+     myName.andando = true;
+   }
+
+   myName.caminhados += mt;
+ }
+
+ myName.addKm(10)
+ myName.addKm(10)
+ myName.addKm(10)
+ myName.addKm(10)
 
 /*
   05
@@ -67,6 +113,21 @@
     - Se a quantidade de metros caminhados for 1, substitua "metros" por 
       "metro", no singular.
 */
+
+const singularOrPlural = (word, val) => {
+  return val === 1 ? `${val} ${word}` : `${val} ${word}s`
+}
+
+myName.showDescription = (desc) => {
+  myName.descricao = desc;
+}
+
+const description = `Oi. Eu sou o ${myName.open} ${myName.sobrenome}, tenho ${singularOrPlural('ano', myName.idade)}, ${singularOrPlural('metro', myName.altura)} de altura, 
+peso ${singularOrPlural('kilo', myName.peso)} e, só hoje, eu já caminhei ${singularOrPlural('metro', myName.caminhados)}.`
+
+myName.showDescription(description)
+
+console.log(myName)
 
 /*
   06
@@ -98,3 +159,4 @@
 
   Dica: propriedades de objetos podem ser declaradas como strings.
 */
+

@@ -4,17 +4,22 @@
   - Implemente um código assíncrono entre os console.log() abaixo.
 */
 
-console.log('Linha 1')
-console.log('Linha 2')
-console.log('Linha 3')
-console.log('Linha 4')
+// console.log('Linha 1')
+// console.log('Linha 2')
+// console.log('Linha 3')
+// console.log('Linha 4')
 
+// const ola = () => {
+//   const hello = 'Hello'
+//   console.log(hello)
+// }
 
+// setTimeout(ola, 3000)
 
-console.log('Linha 5')
-console.log('Linha 6')
-console.log('Linha 7')
-console.log('Linha 8')
+// console.log('Linha 5')
+// console.log('Linha 6')
+// console.log('Linha 7')
+// console.log('Linha 8')
 
 /*
   02
@@ -23,8 +28,12 @@ console.log('Linha 8')
     "logGreeting" ser exibida no console.
 */
 
-function logGreeting (name) {
+function logGreeting(name) {
   console.log(`olá, ${name}`)
+}
+
+const x = callback => {
+  callback('Alan')
 }
 
 // x(logGreeting)
@@ -35,10 +44,12 @@ function logGreeting (name) {
   - O código abaixo possui uma parte que pode ser isolada. Isole-a.
 */
 
-const numbers = [3, 4, 10, 20]
-const lesserThanFive = numbers.filter(num => num < 5)
+const numbers = [3, 4, 10, 20];
+const filterNumbers = (numbers) => numbers.filter(num => num < 5);
+const lesserThanFive = filterNumbers(numbers);
 
-console.log(lesserThanFive)
+// console.log(lesserThanFive)
+// console.log([3, 4, 10, 20].filter((num) => num < 5));
 
 /*
   04
@@ -47,13 +58,11 @@ console.log(lesserThanFive)
 */
 
 const prices = [12, 19, 7, 209]
-let totalPrice = 0
+const getTotalPrce = (acc, cur) => acc + cur
+const totalPrice = prices.reduce(getTotalPrce, 0);
 
-for (let i = 0; i < prices.length; i++) {
-  totalPrice += prices[i]
-}
 
-console.log(`Preço total: ${totalPrice}`)
+// console.log(`Preço total: ${totalPrice}`)
 
 /*
   05
@@ -63,6 +72,9 @@ console.log(`Preço total: ${totalPrice}`)
 */
 
 let car = { color: 'amarelo' }
+let secondCar = car;
+secondCar.color = 'Azul';
+console.log(car.color, secondCar.color)
 
 /*
   06
@@ -73,6 +85,15 @@ let car = { color: 'amarelo' }
   - Se todos os argumentos forem passados, retorne a string 'A função foi 
     invocada com 3 argumentos'.
 */
+
+const checkParameters = (par1, par2, par3) => {
+
+  const isUndefined = [par1, par2, par3].some(num => num === undefined)
+
+  return isUndefined ? "A função deve ter 3 parametros" : `Os parametros são: ${par1},  ${par2} e  ${par3}`;
+}
+
+// console.log(checkParameters('Mazzolinha', 'Lulinha', 'Brandão'))
 
 /*
   07
@@ -100,3 +121,27 @@ let booksBox = {
   spaces: 5,
   booksIn: 0
 }
+
+booksBox.addBoock = bookQuantity => {
+
+  let { spaces} = booksBox;
+
+  booksBox.booksIn += bookQuantity;
+
+  if (booksBox.booksIn === spaces) {
+    return `A caixa está cheia`;
+  } 
+
+  if (booksBox.booksIn + bookQuantity > spaces  ) {
+    const availableSpace = spaces - booksBox.booksIn;
+    return `Só cabe mais ${availableSpace}`;
+  }
+
+  return `Já há ${booksBox.booksIn} livros na caixa`;
+
+  
+
+}
+booksBox.addBoock(2)
+console.log(booksBox.addBoock(1))
+console.log(booksBox)
