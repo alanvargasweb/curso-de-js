@@ -16,16 +16,22 @@
   - Teste também a verificação do item acima.
 */
 
-const request = new XMLHttpRequest();
+// const request = new XMLHttpRequest();
 
-request.addEventListener('readystatechange', () => {
-  if ( request.readyState === 4 && request.status === 200) {
-    console.log(request.responseText, request)
-  }
-})
+// request.open('GET','https://pokeapi.co/api/v2/pokemon/pikachu');
+// request.send();
 
-request.open('GET','https://pokeapi.co/api/v2/pokemon/pikachu');
-request.send();
+// request.addEventListener('readystatechange', () => {
+//   if ( request.readyState === 4 && request.status === 200) {
+//     console.log(request.responseText, request);
+//     return;
+//   } 
+//   if (request.readyState === 4 ) {
+//     console.log('Não foi possivel retiornar a lista')
+//   }
+// })
+
+
 
 
 /*
@@ -43,16 +49,16 @@ request.send();
     - Quantos metros você caminhou (number iniciado em 0).
 */
 
-const myName = {
+let person = {
   name: 'Alan',
-  sobrenome: 'Vargas',
-  sexo: 'Masculino',
-  idade: 35,
-  altura: 1.8,
-  peso: 78,
-  andando: true,
-  caminhados: 2000,
-  descricao: ''
+  surname: 'Vargas',
+  gender: 'Masculino',
+  age: 35,
+  height: 1.8,
+  weight: 78,
+  walking: true,
+  walked: 2000,
+  description: ''
 }
 
 /*
@@ -64,13 +70,15 @@ const myName = {
   - Após criar o método, adicione 5 anos à idade do objeto.
 */
 
-myName.addAge = (age) => {
-  myName.idade ++;
+person.incrementAge = () => {
+  person.age ++;
 }
 
-myName.addAge(1)
+for ( let i = 0; i < 5; i ++) {
+  person.incrementAge()
+}
 
-// console.log(myName)
+
 
 /*
   04
@@ -83,19 +91,16 @@ myName.addAge(1)
     método 4x, com diferentes metragens passadas por parâmetro.
 */
 
- myName.addKm = (mt) => {
-   
-   if (!myName.andando) {
-     myName.andando = true;
-   }
+person.walk = meters => {
+  let res = meters.reduce((acc, cur) => {
+    return acc + cur
+  })
+  person.walked += res;
+  person.walking = true;
+}
 
-   myName.caminhados += mt;
- }
-
- myName.addKm(10)
- myName.addKm(10)
- myName.addKm(10)
- myName.addKm(10)
+person.walk([10, 5, 10, 5])
+console.log(person)
 
 /*
   05
@@ -118,16 +123,16 @@ const singularOrPlural = (word, val) => {
   return val === 1 ? `${val} ${word}` : `${val} ${word}s`
 }
 
-myName.showDescription = (desc) => {
-  myName.descricao = desc;
+person.showDescription = () => {
+  const article = person.gender === 'Masculino' ? 'o' : 'a';
+  return `Oi. Eu sou ${article} ${person.name} ${person.surname}, tenho ${singularOrPlural('ano', person.age)}, ${singularOrPlural('metro', person.height)} de altura, 
+  peso ${singularOrPlural('kilo', person.weight)} e, só hoje, eu já caminhei ${singularOrPlural('metro', person.walked)}.`;
 }
 
-const description = `Oi. Eu sou o ${myName.open} ${myName.sobrenome}, tenho ${singularOrPlural('ano', myName.idade)}, ${singularOrPlural('metro', myName.altura)} de altura, 
-peso ${singularOrPlural('kilo', myName.peso)} e, só hoje, eu já caminhei ${singularOrPlural('metro', myName.caminhados)}.`
 
-myName.showDescription(description)
+// person.showDescription(description)
 
-console.log(myName)
+console.log(person.showDescription())
 
 /*
   06

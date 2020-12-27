@@ -8,6 +8,39 @@
     dados dos usuários."
 */
 
+const getData = (url) => {
+
+  return new Promise((resolve, reject) => {
+    const request = new XMLHttpRequest();
+
+  request.addEventListener('readystatechange', () => {
+    const isRequestOk = request.readyState === 4 && request.status === 200;
+    const isRequestNotOk = request.readyState === 4;
+
+    if (isRequestOk) {
+      const data = JSON.parse(request.responseText)
+      resolve(data)
+    }
+
+    if (isRequestNotOk) {
+      reject('Não foi possivel retiornar a lista')
+    }
+
+  })
+
+  request.open('GET', url);
+  request.send();
+  })
+}
+
+// getData('https://jsonplaceholder.typicode.com/users')
+//   .then(res => {
+//     console.log(res)
+//   })
+//   .catch(error => {
+//     console.log(error)
+//   })
+
 /*
   02
 
@@ -22,6 +55,22 @@
   - Se o operador não for válido, retorne a mensagem "Operação inválida."
 */
 
+const makeCalculation = (n1, n2, operator, operation) => {
+  return `Resultado da operação: ${n1} ${operator} ${n2} = ${operation}`
+}
+
+const calculator = operator => (n1, n2) => ({
+  "+": makeCalculation(n1, n2, operator, n1 + n2),
+  "-": makeCalculation(n1, n2, operator, n1 - n2),
+  "x": makeCalculation(n1, n2, operator, n1 * n2),
+  "/": makeCalculation(n1, n2, operator, n1 / n2),
+})[operator] || `Não foi possivel retornar o valor de ${n1} ${operator} ${n2}`;
+
+
+
+const sum = calculator('+')
+// console.log(sum(3,6));
+
 /*
   03
 
@@ -35,6 +84,42 @@
   - Crie um novo array chamado `newSul`, que recebe somente os estados do sul,
     pegando do array `brasil`. Não remova esses itens de `brasil`.
 */
+
+// const divisaoNorte = ['norte', 'nordeste','noroeste', 'centro'];
+// const divisaoSul = ['sul','sudeste','leste','oeste'];
+
+// const nacional = divisaoNorte.concat(divisaoSul)
+/* --------------------------------------------------------- */ 
+const regiaoNorte = ['AP', 'PA', 'MA', 'PI'];
+const regiaoNoroeste = ['AC', 'AM', 'RR'];
+const regiiaoNordeste = ['CE', 'RN', 'PE', 'PB'];
+const regiaoCentral = ['TO', 'GO', 'DF'];
+
+const divNorte = regiaoNorte.concat(regiaoNoroeste, regiiaoNordeste, regiaoCentral);
+//console.log(divNorte)
+
+const regiaoSul = ['RS', 'SC', "PR"];
+const regiaoSudeste = ['SP', 'RJ', 'MG'];
+const regiaoLeste = ['BA', 'SE', 'ES', "AL"];
+const regiaoOeste = ['MT', 'MS', 'RO'];
+
+const divSul = regiaoSul.concat(regiaoSudeste, regiaoLeste, regiaoOeste)
+//console.log(divSul)
+
+let nacional = divSul.concat(divNorte);
+//console.log(nacional)
+
+const existDF = nacional.includes('FN')
+
+if(existDF === false) {
+  nacional.unshift('FN')
+}
+
+//console.log(nacional)
+
+const brasil = nacional.map((item, index) => ({ id: index, estado: item }));
+
+console.log(brasil)
 
 /*
   04
@@ -54,6 +139,19 @@
     console: "Nem todos os estados tem mais de 7 letras.". Pesquise pelo método 
     every.
 */
+
+
+
+const newSul = nacional.splice(1,3)
+//console.log(newSul)
+//console.log(nacional)
+const newStates = ['TJ', 'TR', 'MJ', 'SS']; 
+nacional = nacional.concat(newStates);
+// console.log(nacional)
+
+const hasleterJ = nacional.some(item => item.includes('J'))
+console.log(hasleterJ)
+
 
 /*
   05

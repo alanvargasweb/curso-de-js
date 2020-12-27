@@ -13,6 +13,76 @@
       executado quando o request anterior for finalizado.
 */
 
+
+const getTodos = url => new Promise((resolve, reject) => {
+  const request = new XMLHttpRequest();
+
+  request.addEventListener('readystatechange', () => {
+    const isRequestOk = request.readyState === 4 && request.status === 200;
+    const isRequestNotOk = request.readyState === 4;
+
+    if (isRequestOk) {
+      const data = JSON.parse(request.responseText)
+      resolve(data)
+    }
+
+    if (isRequestNotOk) {
+      reject('Não foi possivel retiornar a lista')
+    }
+
+  })
+
+  request.open('GET', url);
+  request.send();
+
+})
+
+// getTodos('https://pokeapi.co/api/v2/pokemon/1')
+//   .then(pokemon => {
+//     console.log(pokemon)
+//     return getTodos('https://pokeapi.co/api/v2/pokemon/2')
+//   })
+//   .then(pokemon => {
+//     console.log(pokemon)
+//     return getTodos('https://pokeapi.co/api/v2/pokemon/3')
+//   })
+//   .then(console.log)
+//   .catch(error => console.log(error))
+
+
+
+// const logData = (error, data) => error ? console.log(error) : console.log(`Nome do pokemom obtido: ${data.name}`)
+
+// requestBase('https://pokeapi.co/api/v2/pokemon/1', (error, data) => {
+//   logData(error, data);
+//   requestBase('https://pokeapi.co/api/v2/pokemon/2', (error, data) => {
+//     logData(error, data);
+//     requestBase('https://pokeapi.co/api/v2/pokemon/7', (error, data) => {
+//       logData(error, data)
+//     })
+//   })
+// })
+
+// const getData = () => {
+
+//   return new Promise((resolve, reject) => {
+//     resolve("Dados")
+//     reject('erro ao consultar os dados')
+//   });
+
+// }
+
+// getData()
+// .then(value => {
+//   console.log(value)
+// })
+//   .catch(error => {
+//     console.log(error)
+//   })
+
+// console.log(getData())
+
+
 /*
   02
 
@@ -35,6 +105,21 @@
   curso, onde falaremos sobre TDD. Vá se aquecendo =)
 */
 
+const map = (array, func) => {
+  let newArray = [];
+
+  const addNewItemToArray = item => {
+    const newItem = func(item)
+    newArray.push(newItem);
+  };
+  
+  array.forEach(addNewItemToArray);
+  return newArray;
+}
+
+// console.log(map([1,2,3], number => number * 2));
+// console.log(map([23, 45, 23], number => number * 12));
+
 /*
   03
 
@@ -44,7 +129,9 @@
 
 const person = {
   name: 'Roger',
-  getName: () => this.name
+  getName() {
+   return person.name;
+  }
 }
 
 // console.log(person.getName())
@@ -59,7 +146,13 @@ const person = {
 */
 
 const x = 'x'
-// const x = 'y'
+
+const returnX = () => {
+  const x = 'y'
+  return x;
+}
+
+// console.log(x, returnX());
 
 /*
   05
@@ -68,14 +161,11 @@ const x = 'x'
     conseguir.
 */
 
-const getFullName = (user) => {
-  const firstName = user.firstName
-  const lastName = user.lastName
-
+const getFullName = ({ firstName, lastName }) => {
   return `${firstName} ${lastName}`
 }
 
-console.log(getFullName({ firstName: 'Afonso', lastName: 'Solano' }))
+// console.log(getFullName({ firstName: 'Afonso', lastName: 'Solano' }))
 
 /*
   06
@@ -90,6 +180,23 @@ console.log(getFullName({ firstName: 'Afonso', lastName: 'Solano' }))
     a mensagem 'Não temos o equivalente hexadecimal para COR';
   - Exiba o hexadecimal de 8 cores diferentes usando a função criada acima.
 */
+
+const convertToHex = color => {
+
+  const colors = {
+    red: '#a312323',
+    blue: '#%fd54R',
+    green: '#34FG65R'
+  }
+  
+  return colors[color] ? `O hexadecimal para ${color} é ${colors[color]}` : 'Não foi possivel retotnar a cor'
+}
+
+
+const colors = ['black', 'blue', 'red', 'white'];
+
+const logColor = color => console.log(convertToHex(color))
+ colors.forEach(logColor)
 
 
 /*
@@ -108,10 +215,18 @@ console.log(getFullName({ firstName: 'Afonso', lastName: 'Solano' }))
 */
 
 const people = [
-  { id: 5 , name: 'Angelica', age: 18, federativeUnit: 'Pernambuco' },
+  { id: 5, name: 'Angelica', age: 18, federativeUnit: 'Pernambuco' },
   { id: 81, name: 'Thales', age: 19, federativeUnit: 'São Paulo' },
   { id: 47, name: 'Ana Carolina', age: 18, federativeUnit: 'Alagoas' },
   { id: 87, name: 'Felipe', age: 18, federativeUnit: 'Minas Gerais' },
-  { id: 9 , name: 'Gabriel', age: 20, federativeUnit: 'São Paulo' },
+  { id: 9, name: 'Gabriel', age: 20, federativeUnit: 'São Paulo' },
   { id: 73, name: 'Aline', age: 19, federativeUnit: 'Brasília' }
 ]
+
+
+const ageFrequency = people.reduce((acc, { federativeUnit }) => {
+  acc[federativeUnit] = acc[federativeUnit] + 1 || 1 ;
+  return acc
+}, {})
+
+// console.log(ageFrequency)
