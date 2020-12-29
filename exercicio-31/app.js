@@ -8,6 +8,17 @@
     do GitHub.
 */
 
+const fetchGitUsers = async username => {
+  const response = await fetch(`https://api.github.com/users/${username}`);
+  return await response.json();
+}
+
+const logGitHubUser = async username => {
+  console.log(await fetchGitUsers(username))
+}
+
+logGitHubUser('alanvargasweb')
+
 /*
   02
 
@@ -16,7 +27,16 @@
   - Exiba esse novo array no console.
 */
 
-const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+const divisible = (number) => number % 2 === 0 || number % 3 === 0
+
+const newNumberArray = numbers
+  .filter(divisible);
+
+console.log(newNumberArray)
+
+
 
 /*
   03
@@ -31,6 +51,13 @@ const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     - Natália => "PNaPtáPlia";
     - Rafaela => "PRaPfaPePla".
 */
+
+const myName = ['Maz','zo','li','nha'];
+
+const pLanguage = (array) => {
+  return array.reduce((acc, sylab) => `${acc}P${sylab}`, "")
+}
+console.log(pLanguage(myName))
 
 /*
   04
@@ -47,6 +74,12 @@ const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   Dica: pesquise pelo método split.
 */
 
+const myFirstName = 'Alan';
+const myFirstNameArray = myFirstName.split('')
+const myFirstNameArray2 = myFirstNameArray.map((item, index, array) => ({ index: index, item: item, message: `${item} é a  ${index  + 1}° letra do nome ${array.join('')}` }));
+console.log(myFirstNameArray2)
+
+
 /*
   05
 
@@ -59,6 +92,14 @@ const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
   Dica: pesquise pelo método Object.keys().
 */
+
+const person = {
+  name: 'Alan',
+  lastname: 'Vargas',
+  age: 212
+}
+
+console.log(Object.keys(person));
 
 /*
   06
@@ -73,14 +114,31 @@ const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   - Utilize o array abaixo para testar a função.
 */
 
-const scores = [100, 90, 85, 100, 60, 85, 100, 90, 55, 75, 60]
+
+const scores = [100, 90, 85, 100, 60, 85, 100, 90, 55, 75, 60];
+
+const getNumber = (number, array) => {
+
+
+  const ocorrence = array.reduce( (acc, cur) => {
+    acc[cur] = acc[cur] + 1 || 1;
+    return acc;
+  }, {})
+
+  const ifContains = Object.keys(ocorrence);
+  const message = `O número ${number} aparece ${ocorrence[number]} vezes`
+
+  return ifContains.includes(number) ? message : `O número ${number} não existe no array passado`
+}
+
+console.log(getNumber(101, scores))
 
 /*
   07
 
   - Já implementamos o método some e o método map, do zero;
   - Neste exercício, seu desafio será criar o método filter, do zero;
-  - Implemente uma função "filter" que possui a mesma funcionalidade do método  
+  - Implemente uma função "filter" que possui a mesma funcionalidade do método
     filter original;
   - Você não poderá utilizar o método filter original, embutido na linguagem;
   - A assinatura e retorno da invocação desta função devem ser os seguintes:
@@ -94,7 +152,40 @@ const scores = [100, 90, 85, 100, 60, 85, 100, 90, 55, 75, 60]
   - Se você não se lembra como o método filter funciona, há 2 opções:
     1) Reassistir à aula "O método filter" - Aula 01-03 da etapa 08;
     2) Pesquisar no MDN.
-  
-  Dica: lembre-se que o método filter inclui o item em questão no novo array 
+
+  Dica: lembre-se que o método filter inclui o item em questão no novo array
   que está sendo gerado **apenas** se a função retorna um valor truthy.
 */
+
+// const arrayOffNumbers = [17, 38, 64, 51, 20, 88, 34];
+
+// const biggerNumber = (array) => {
+//   let biggest = 0
+
+//   array.map(item => {
+//     if(item > biggest) {
+//       biggest = item
+//     }
+//   })
+
+//   return `O maior número entre os números passados no array é ${biggest}`;
+// }
+
+// console.log(biggerNumber(arrayOffNumbers))
+
+const filter = (array, func) => {
+  let newArray = [];
+
+  array.forEach((item, index) => {
+    if(func(item, index, array)) {
+      newArray.push(item)
+    }
+  })
+
+  return newArray;
+}
+
+console.log(filter([1, 2, 3, 4, 5], item => item > 1 ))
+console.log(filter([1, 2, 3, 4, 5], item => item % 2 === 0 ))
+console.log(filter([1, 2, 3, 4, 5, 6, 9], (item, index) => item === index + 1))
+console.log(filter([1, 2, 3, 1, 4, 6, 10], (iten, index, array) => index === array.indexOf(iten)))
