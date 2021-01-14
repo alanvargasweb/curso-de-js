@@ -12,6 +12,18 @@
     versão deve fazer o mesmo que a função anterior faz, mas de forma diferente.
 */
 
+const arr = ['Dirley', 'Mazzolinha', 'Tuca', 'Lulinha', 'Ubitajara', 1979];
+
+const invertItens = value => [... value].reverse()
+
+const invertItens2 = value => value
+  .split('')
+  .reduce((acc, letter) => {
+  return letter + acc;
+  }, '')
+
+ console.log(invertItens('Mazzolinha'))
+
 /*
   02
   
@@ -19,13 +31,17 @@
 */
 
 const numbers = [5, 20, 7, 32, 47, 15, 83, 91, 27, 33]
-let foundNumber = false
+let foundNumber = numbers.includes(15);
 
-numbers.forEach(number => {
-  if (number === 15) {
-    foundNumber = true
-  }
-})
+// const numberEqual5 = numbers.some(number => number === 15);
+
+// numberEqual5 === true ? foundNumber = true : foundNumber = false
+
+// console.log(issetNumber)
+
+// const foundNumber = (number, array) => {
+//   return array.some(foundNumber => foundNumber === number)
+// }
 
 console.log(foundNumber)
 

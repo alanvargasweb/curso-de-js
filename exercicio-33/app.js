@@ -17,6 +17,9 @@
   - Implemente a função da forma mais concisa que você conseguir.
 */
 
+const swap = ([first, , third]) => [third, first];
+console.log(swap([141,664,786]));
+
 /*
   03
 
@@ -30,6 +33,10 @@ const topics = [
   { id: 3, name: 'Carreiras'}
 ]
 
+const [, , { name }] = topics;
+
+ 
+
 /*
   04
 
@@ -39,6 +46,8 @@ const topics = [
 */
 
 const colors = ['#FF00FF', ['#FF0D0D', '#0AFA00', '#011EFA'], '#7BF0FF']
+
+const [ , [red, green, blue], ] = colors;
 
 /*
   05
@@ -54,8 +63,13 @@ const colors = ['#FF00FF', ['#FF0D0D', '#0AFA00', '#011EFA'], '#7BF0FF']
     - Faça a função retornar "Olá, meu nome é [NOME]!".
 */
 
-// console.log(greet({ name: 'Roger' }, 'name'))
-// console.log(greet({}, 'personName'))
+const greet = (obj, dynamicName) => {
+  const {[dynamicName]: myName = 'Desconhecido' } = obj;
+  return `Olá, meu nome é ${myName}!`
+}
+
+console.log(greet({ name: 'Alan' }, 'name'))
+console.log(greet({}, 'personName'))
 
 /*
   06

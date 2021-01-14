@@ -5,6 +5,23 @@
     e retorna o valor da key parseado para objeto javascript.
 */
 
+const listOfPLayers = [
+  {name: 'Mazzzolinha', goals: 301},
+  {mane: 'Lulinha', goals: 860}
+];
+
+localStorage.setItem('players', JSON.stringify(listOfPLayers));
+
+const getItenOfLocalstorage = (item) => {
+  
+
+  const getItemValue = localStorage.getItem(item);
+
+  return JSON.parse(getItemValue);
+}
+
+console.log(getItenOfLocalstorage('players'))
+
 /*
   02
 
@@ -21,7 +38,9 @@
 const input = document.querySelector('[data-js="input"]')
 
 input.addEventListener('input', event => {
-  console.log(event.target.value)
+  const value = event.target.valueAsNumber;
+
+  console.log(typeof value)
 })
 
 /*
@@ -39,28 +58,20 @@ input.addEventListener('input', event => {
     retornar 60 e a segunda invocação, 10.
 */
 
-function add100 (num) {
-  return num + 100
+
+
+const add100 = num =>  num + 100;
+const divByFive= num =>  num / 5;
+const multiplyByThree= num =>  num * 3;
+const multiplyFive= num =>  num * 5;
+const addTen= num =>  num + 10;
+
+const combineOperations = (init, arrays) => {
+  return arrays.reduce((acc, func) =>  func(acc), init)
 }
 
-function divByFive (num) {
-  return num / 5
-}
-
-function multiplyByThree (num) {
-  return num * 3
-}
-
-function multiplyFive (num) {
-  return num * 5
-}
-
-function addTen (num) {
-  return num + 10
-}
-
-// console.log(combineOperations(0, [add100, divByFive, multiplyByThree]))
-// console.log(combineOperations(0, [divByFive, multiplyFive, addTen]))
+console.log(combineOperations(0, [add100, divByFive, multiplyByThree]))
+console.log(combineOperations(0, [divByFive, multiplyFive, addTen]))
 
 /*
   04
@@ -101,9 +112,12 @@ const searchAlbum = {
   genre: 'Rock'
 }
 
-if (albums.includes(searchAlbum)) {
-  console.log(`${JSON.stringify(searchAlbum)} existe no array albums.`)
-}
+const searchAlbunExistInArray = albums
+  .some(album => album.id === searchAlbum.id)
+
+// if (searchAlbunExistInArray) {
+//   console.log(`${JSON.stringify(searchAlbum.id)} existe no array albums.`)
+// }
 
 /*
   05
@@ -122,6 +136,19 @@ const obj = {
   prop8: { a: 'x', b: 'y' },
 }
 
+const objCopy = { ...obj,
+                    prop8: { ...obj.prop8}                  
+}
+console.log(objCopy)
+
+objCopy.prop1 = 'Modificado'
+objCopy.prop8.a = 'Modificado'
+
+console.log(obj.prop1 === objCopy.prop1)
+console.log(obj.prop8.a === objCopy.prop8.a)
+console.log(obj)
+console.log(objCopy)
+
 /*
   06
 
@@ -132,6 +159,27 @@ const obj = {
 
   Dica: pesquise por Object.entries.
 */
+
+
+
+const createHTMLElement = (elem, props, content) => {
+  const container = document.querySelector('#container');
+  const element = document.createElement(elem);
+  const attributesOfArray = Object.entries(props);
+  attributesOfArray.forEach(([key, value]) => element.setAttribute(key, value));
+  element.append(content);
+  container.append(element);
+}
+
+
+createHTMLElement('p',{
+  id: 'teste',
+  name: 'teste',
+  style: 'color: red'
+}, 'Isso é um teste')
+
+
+
 
 /*
   07
